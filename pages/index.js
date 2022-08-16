@@ -4,7 +4,7 @@ export default function App() {
 
   return (
     <>
-      <a href="/editors">Editores</a>
+      <a href="/editors">Tester Editores</a>
     </>
   );
 }
