@@ -1,12 +1,21 @@
 import { Editor } from '@tinymce/tinymce-react'; 
 import { CKEditor } from 'ckeditor4-react';
+import { useState, useEffect } from 'react';
 
 function Editors() {
+
+  const [ content, setContent ] = useState()
+
+  useEffect(() => {
+    setContent(localStorage.getItem('content'))
+    console.log(content)
+  }, [])
+
   return (
     <form>
       <Editor
-        apiKey='rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw'
-        initialValue="<p>Tiny <strong>MCE</strong></p>"
+        apiKey='rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw' 
+        initialValue={content || '<p>Digite algo e salve, recarregue a pagina para ver o conteudo atualizado</p>'}
         init={{
           skin: 'snow', // skin padrão compatível com o smartSign
           icons: 'material',
@@ -24,8 +33,7 @@ function Editors() {
           menu: {view: { title: 'View', items: 'code | preview' }, olar: { title: 'Olar!', items: 'code' },},
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}',
           save_onsavecallback: () => {
-            const content = tinymce.activeEditor.getContent();
-            console.log(content);
+            localStorage.setItem('content', tinymce.activeEditor.getContent());
           }
         }}
       />
