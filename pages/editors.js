@@ -2,14 +2,30 @@ import { Editor } from '@tinymce/tinymce-react';
 import { CKEditor } from 'ckeditor4-react';
 import { useState, useEffect } from 'react';
 
-function Editors() {
+export default function Editors() {
 
   const [ content, setContent ] = useState()
 
-  useEffect(() => {
-    setContent(localStorage.getItem('content'))
-    console.log(content)
-  }, [])
+  const fetchContent = async () => {
+    const response = await fetch('http://localhost:3000/api/content')
+    const data = await response.json()
+    setContent(data)
+  }
+
+  const updateContent = async () => {
+    const response = await fetch('http://localhost:3000/api/content', {
+      method: 'PATCH',
+      body: JSON.stringify('batatinha'),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+    console.log(data, 'body')
+    setContent(data)
+  }
+
+  useEffect(() => fetchContent, [])
 
   return (
     <form>
@@ -32,8 +48,12 @@ function Editors() {
           menubar: 'edit view insert format table olar',
           menu: {view: { title: 'View', items: 'code | preview' }, olar: { title: 'Olar!', items: 'code' },},
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}',
+          
           save_onsavecallback: () => {
-            localStorage.setItem('content', tinymce.activeEditor.getContent());
+            const currentContent = tinymce.activeEditor.getContent()
+            setContent(currentContent)
+            updateContent()
+            console.log(content, 'content')
           }
         }}
       />
@@ -44,4 +64,3 @@ function Editors() {
   );
 }
 
-export default Editors
