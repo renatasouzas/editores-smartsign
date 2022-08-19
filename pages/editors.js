@@ -1,37 +1,40 @@
 import { Editor } from '@tinymce/tinymce-react'; 
 import { CKEditor } from 'ckeditor4-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-export default function Editors() {
+export default function Editors({dbContent}) {
 
-  const [ content, setContent ] = useState()
+  const [ content, setContent ] = useState(dbContent)
 
-  const fetchContent = async () => {
-    const response = await fetch('http://localhost:3000/api/content')
-    const data = await response.json()
-    setContent(data)
+  function handleChange(editorContent) {
+    console.log(editorContent, 'handleChange')
+    setContent(editorContent);
+  }
+
+  function handleSubmit() {
+    console.log(content, 'handleSubmit')
+    updateContent()
   }
 
   const updateContent = async () => {
     const response = await fetch('http://localhost:3000/api/content', {
       method: 'PATCH',
-      body: JSON.stringify('batatinha'),
+      body: JSON.stringify(content),
       headers: {
         'Content-Type': 'application/json'
       }
     })
+    console.log(response.body, 'response body')
     const data = await response.json()
-    console.log(data, 'body')
     setContent(data)
   }
 
-  useEffect(() => fetchContent, [])
-
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Editor
-        apiKey='rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw' 
-        initialValue={content || '<p>Digite algo e salve, recarregue a pagina para ver o conteudo atualizado</p>'}
+        apiKey='rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw'
+        value={content}
+        onEditorChange={handleChange}
         init={{
           skin: 'snow', // skin padrão compatível com o smartSign
           icons: 'material',
@@ -39,24 +42,18 @@ export default function Editors() {
           plugins: [
             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'code', 'help', 'save'
+            'insertdatetime', 'media', 'table', 'code', 'help'
           ],
           toolbar: 'undo redo | table | blocks | ' +
             'bold italic forecolor fontfamily | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist | ' +
-            'removeformat | code | save',
+            'removeformat | code ',
           menubar: 'edit view insert format table olar',
           menu: {view: { title: 'View', items: 'code | preview' }, olar: { title: 'Olar!', items: 'code' },},
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}',
-          
-          save_onsavecallback: () => {
-            const currentContent = tinymce.activeEditor.getContent()
-            setContent(currentContent)
-            updateContent()
-            console.log(content, 'content')
-          }
         }}
       />
+      <input type="submit" value="Submit" />
       <CKEditor
         initData="<p>CKEditor 4</p>"
       />
@@ -64,3 +61,13 @@ export default function Editors() {
   );
 }
 
+export async function getServerSideProps() {
+  const response = await fetch('http://localhost:3000/api/content')
+  const data = await response.json()
+
+  return {
+    props: {
+      dbContent: data
+    }
+  }
+}
