@@ -41,19 +41,18 @@ export default function Editors({dbContent}) {
           height: '300px',
           plugins: [
             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'code', 'help'
+            'anchor', 'visualblocks', 'code', 'media', 'table', 'code', 'help'
           ],
           toolbar: 'undo redo | table | blocks | ' +
             'bold italic forecolor fontfamily | alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist | ' +
-            'removeformat | code ',
-          menubar: 'edit view insert format table olar',
-          menu: {view: { title: 'View', items: 'code | preview' }, olar: { title: 'Olar!', items: 'code' },},
+            'removeformat | code preview',
+          menubar: 'insert format',
+          menu: {view: { title: 'View', items: 'code | preview' }},
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}',
         }}
       />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Salvar" />
       <CKEditor
         initData="<p>CKEditor 4</p>"
       />
