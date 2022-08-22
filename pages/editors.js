@@ -57,6 +57,7 @@ export default function Editors({dbContent}) {
         initData="<p>CKEditor 4</p>"
         config={{
           height: '100px',
+          skin: 'kama',
           toolbar: [
             { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
             { name: 'links', items: [ 'Link', 'Unlink' ] },
@@ -65,7 +66,7 @@ export default function Editors({dbContent}) {
             { name: 'basicstyles', items: [ 'Bold', 'Italic', '-', 'RemoveFormat' ] },
             { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
             { name: 'styles', items: [ 'Styles', 'Format' ] }
-          ]
+          ],
         }}
       />
     </form>
