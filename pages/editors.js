@@ -55,6 +55,18 @@ export default function Editors({dbContent}) {
       <input type="submit" value="Salvar" />
       <CKEditor
         initData="<p>CKEditor 4</p>"
+        config={{
+          height: '100px',
+          toolbar: [
+            { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
+            { name: 'links', items: [ 'Link', 'Unlink' ] },
+            { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule' ] },
+            { name: 'document', items: [ 'Source' ] },
+            { name: 'basicstyles', items: [ 'Bold', 'Italic', '-', 'RemoveFormat' ] },
+            { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
+            { name: 'styles', items: [ 'Styles', 'Format' ] }
+          ]
+        }}
       />
     </form>
   );
