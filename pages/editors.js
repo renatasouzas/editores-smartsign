@@ -1,6 +1,6 @@
-import { Editor } from '@tinymce/tinymce-react';
-import { CKEditor } from 'ckeditor4-react';
 import { useState } from 'react';
+import CKEditor4 from './components/CKEditor4';
+import TinyMCE from './components/TinyMCE';
 
 export default function Editors({dbContent}) {
 
@@ -39,50 +39,17 @@ export default function Editors({dbContent}) {
 
   return (
     <>
-      <form onSubmit={handleTinySubmit}>
-        <Editor
-          apiKey='rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw'
-          value={tinyContent}
-          onEditorChange={handleTinyChange}
-          init={{
-            icons: 'material',
-            height: '320px',
-            plugins: [
-              'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-              'anchor', 'visualblocks', 'code', 'media', 'table', 'code', 'help'
-            ],
-            toolbar: 'undo redo | table | blocks | ' +
-              'bold italic forecolor fontfamily | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist | ' +
-              'removeformat | code preview',
-            menubar: 'insert format',
-            menu: {view: { title: 'View', items: 'code | preview' }},
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}',
-          }}
-        />
-        <input type="submit" value="Salvar Tiny Editor" />
-      </form>
+      <TinyMCE 
+        handleSubmit={handleTinySubmit}
+        handleChange={handleTinyChange}
+        content={tinyContent}
+      />
 
-      <form onSubmit={handleCkSubmit}>
-        <CKEditor
-          initData={ckContent}
-          config={{
-            height: '200px',
-            skin: 'kama',
-            toolbar: [
-              { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
-              { name: 'links', items: [ 'Link', 'Unlink' ] },
-              { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule' ] },
-              { name: 'document', items: [ 'Source' ] },
-              { name: 'basicstyles', items: [ 'Bold', 'Italic', '-', 'RemoveFormat' ] },
-              { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
-              { name: 'styles', items: [ 'Styles', 'Format', 'Color' ] }
-            ],
-          }}
-          onChange={handleCkChange}
-        />
-        <input type="submit" value="Salvar CKEditor" />
-      </form>
+      <CKEditor4 
+        handleSubmit={handleCkSubmit}
+        handleChange={handleCkChange}
+        content={ckContent}
+      />
     </>
   );
 }
