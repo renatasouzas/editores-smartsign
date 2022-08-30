@@ -1,13 +1,19 @@
 import { useState, useRef, useEffect } from 'react';
-import CKEditor4 from './components/CKEditor4';
 import TinyMCE from './components/TinyMCE';
-// import dynamic from 'next/dynamic';
-
-// const CKEditor5 = dynamic(() => import('./components/CKEditor5'), {
-//   ssr: false,
-// });
+import CKEditor4 from './components/CKEditor4';
+import CKEditor5 from './components/CKEditor5';
 
 export default function Editors({dbContent}) {
+
+  ////////////////////////// CKEditor5
+    const [editorLoaded, setEditorLoaded] = useState(false);
+    const [data, setData] = useState("");
+
+    useEffect(() => {
+      setData('batatinha')
+      setEditorLoaded(true);
+    }, []);
+  /////////////////////////
 
   const [ tinyContent, setTinyContent ] = useState(dbContent.tinyContent)
   const [ ckContent, setCkContent ] = useState(dbContent.ckContent)
@@ -44,6 +50,14 @@ export default function Editors({dbContent}) {
 
   return (
     <>
+      <CKEditor5
+        name="description"
+        onChange={(data) => {
+          setData(data);
+        }}
+        editorLoaded={editorLoaded}
+      /> {JSON.stringify(data)}
+      
       <TinyMCE 
         handleSubmit={handleTinySubmit}
         handleChange={handleTinyChange}
@@ -55,8 +69,6 @@ export default function Editors({dbContent}) {
         handleChange={handleCkChange}
         content={ckContent}
       />
-
-      {/* <CKEditor5 /> */}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-const Editor = dynamic(() => import('./components/CKEditor5'), {
+const Editor = dynamic(() => import('./components/ck5'), {
   ssr: false,
 });
 
@@ -14,3 +14,4 @@ function ck5() {
 };
 
 export default ck5;
+
