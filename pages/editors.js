@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import TinyMCE from './components/TinyMCE';
 import CKEditor4 from './components/CKEditor4';
 
@@ -6,19 +6,6 @@ export default function Editors({dbContent}) {
   
     const [ tinyContent, setTinyContent ] = useState(dbContent.tinyMCE)
     const [ ckContent, setCkContent ] = useState(dbContent.CKEditor4)
-
-  /////////////////// Client side rendering 
-  // useEffect(() => {
-  //   async function fetchdata(){
-  //     const content = await fetch('http://localhost:5000/content')
-  //     const contentData = await content.json()
-
-  //     setTinyContent(contentData.tinyMCE)
-  //     setCkContent(contentData.CKEditor4)
-
-  //   }; fetchdata()
-  // }, [])
-  /////////////////////////////////
 
   function handleTinyChange(editorContent) {
     setTinyContent(editorContent);
