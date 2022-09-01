@@ -26,19 +26,12 @@ export default function Editors({dbContent}) {
     setCkContent(editorContent.editor.getData())
   }
 
-  function handleTinySubmit() {
-    updateTinyContent(tinyContent)
-  }
-
-  function handleCkSubmit() {
-    updateCKContent(ckContent)
-  }
-
-  const updateTinyContent = async (body) => {
+  async function handleSubmit() {
     const response = await fetch('http://localhost:5000/content', {
       method: 'PATCH',
       body: JSON.stringify({
-        tinyMCE: body
+        tinyMCE: tinyContent,
+        CKEditor4: ckContent
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -46,20 +39,7 @@ export default function Editors({dbContent}) {
     })
     const data = await response.json()
     setTinyContent(data)
-  }
-
-  const updateCKContent = async (body) => {
-    const response = await fetch('http://localhost:5000/content', {
-      method: 'PATCH',
-      body: JSON.stringify({
-        CKEditor4: body
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await response.json()
-    setCkContent(data)
+    console.log(data, 'novo conteudo')
   }
 
   return (
@@ -73,13 +53,13 @@ export default function Editors({dbContent}) {
       /> {JSON.stringify(data)} */}
       
       <TinyMCE 
-        handleSubmit={handleTinySubmit}
+        handleSubmit={handleSubmit}
         handleChange={handleTinyChange}
         content={tinyContent}
       />
 
       <CKEditor4 
-        handleSubmit={handleCkSubmit}
+        handleSubmit={handleSubmit}
         handleChange={handleCkChange}
         content={ckContent}
       />
