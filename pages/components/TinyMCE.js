@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 const TinyMCE = ({handleSubmit, handleChange, content}) => {
   const apiKey = 'rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw'
   const initialConfig = {
-    icons: 'material',
+    // icons: 'material',
     height: '320px',
     plugins: [
       'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
@@ -21,6 +21,7 @@ const TinyMCE = ({handleSubmit, handleChange, content}) => {
   return (
     <form onSubmit={handleSubmit}>
       <Editor
+        id='id fix'
         apiKey= {apiKey}
         value={content}
         onEditorChange={handleChange}

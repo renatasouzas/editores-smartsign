@@ -1,6 +1,6 @@
 {
   "content": {
-    "tinyMCE": "<p>Tiny</p>",
-    "CKEditor4": "<p>CK</p>\n"
+    "tinyMCE": "<p>Tiny<strong>MCE</strong></p>",
+    "CKEditor4": "<p>CKEditor<strong>4</strong></p>\n"
   }
 }

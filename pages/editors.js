@@ -1,22 +1,24 @@
 import { useState, useRef, useEffect } from 'react';
 import TinyMCE from './components/TinyMCE';
 import CKEditor4 from './components/CKEditor4';
-// import CKEditor5 from './components/CKEditor5';
 
 export default function Editors({dbContent}) {
+  
+    const [ tinyContent, setTinyContent ] = useState(dbContent.tinyMCE)
+    const [ ckContent, setCkContent ] = useState(dbContent.CKEditor4)
 
-  ////////////////////////// CKEditor5
-    // const [editorLoaded, setEditorLoaded] = useState(false);
-    // const [data, setData] = useState("");
+  /////////////////// Client side rendering 
+  // useEffect(() => {
+  //   async function fetchdata(){
+  //     const content = await fetch('http://localhost:5000/content')
+  //     const contentData = await content.json()
 
-    // useEffect(() => {
-    //   setData('<p>Conteudo CKEditor5</p>')
-    //   setEditorLoaded(true);
-    // }, []);
-  /////////////////////////
+  //     setTinyContent(contentData.tinyMCE)
+  //     setCkContent(contentData.CKEditor4)
 
-  const [ tinyContent, setTinyContent ] = useState(dbContent.tinyMCE)
-  const [ ckContent, setCkContent ] = useState(dbContent.CKEditor4)
+  //   }; fetchdata()
+  // }, [])
+  /////////////////////////////////
 
   function handleTinyChange(editorContent) {
     setTinyContent(editorContent);
@@ -44,25 +46,21 @@ export default function Editors({dbContent}) {
 
   return (
     <>
-      {/* <CKEditor5
-        name="description"
-        onChange={(data) => {
-          setData(data);
-        }}
-        editorLoaded={editorLoaded}
-      /> {JSON.stringify(data)} */}
-      
-      <TinyMCE 
-        handleSubmit={handleSubmit}
-        handleChange={handleTinyChange}
-        content={tinyContent}
-      />
+      {ckContent && tinyContent && (
+        <>
+          <TinyMCE 
+            handleSubmit={handleSubmit}
+            handleChange={handleTinyChange}
+            content={tinyContent}
+          />
 
-      <CKEditor4 
-        handleSubmit={handleSubmit}
-        handleChange={handleCkChange}
-        content={ckContent}
-      />
+          <CKEditor4 
+            handleSubmit={handleSubmit}
+            handleChange={handleCkChange}
+            content={ckContent}
+          />
+        </>)
+      }
     </>
   );
 }
