@@ -6,6 +6,8 @@ export default function Editors({dbContent}) {
   
     const [ tinyContent, setTinyContent ] = useState(dbContent.tinyMCE)
     const [ ckContent, setCkContent ] = useState(dbContent.CKEditor4)
+    const [ image, setImage ] = useState('')
+    console.log(image, 'PARENT')
 
   function handleTinyChange(editorContent) {
     setTinyContent(editorContent);
@@ -39,6 +41,7 @@ export default function Editors({dbContent}) {
             handleSubmit={handleSubmit}
             handleChange={handleTinyChange}
             content={tinyContent}
+            setImage={setImage}
           />
 
           <CKEditor4 
