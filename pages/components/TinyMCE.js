@@ -7,16 +7,17 @@ const TinyMCE = ({handleSubmit, handleChange, content, setImage}) => {
 
   const apiKey = 'rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw'
   const initialConfig = {
-    // icons: 'material',
+    branding: false,
+    skin: 'oxide',
     height: '320px',
+    toolbar: 'undo redo | table | styles | ' +
+    'bold italic forecolor fontfamily fontsize | alignleft aligncenter ' +
+    'alignright alignjustify | bullist numlist | ' +
+    'removeformat | code preview image ',
     plugins: [
       'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
       'anchor', 'visualblocks', 'code', 'media', 'table', 'code', 'help'
     ],
-    toolbar: 'undo redo | table | blocks | ' +
-      'bold italic forecolor fontfamily | alignleft aligncenter ' +
-      'alignright alignjustify | bullist numlist | ' +
-      'removeformat | code preview image',
     menubar: 'insert format',
     menu: {view: { title: 'View', items: 'code | preview' }},
     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}',
@@ -47,7 +48,6 @@ const TinyMCE = ({handleSubmit, handleChange, content, setImage}) => {
 
       input.click();
     },
-    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
   }
     
     return (
