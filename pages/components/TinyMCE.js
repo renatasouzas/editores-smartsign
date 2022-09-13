@@ -8,7 +8,8 @@ const TinyMCE = ({handleSubmit, handleChange, content, setImage}) => {
   const apiKey = 'rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw'
   const initialConfig = {
     branding: false,
-    skin: 'oxide',
+    skin_url: "skins/CUSTOM/skins/ui/CUSTOM",
+    content_css: "/skins/CUSTOM/skins/content/CUSTOM/content.css",
     height: '320px',
     toolbar: 'undo redo | table | styles | ' +
     'bold italic forecolor fontfamily fontsize | alignleft aligncenter ' +
