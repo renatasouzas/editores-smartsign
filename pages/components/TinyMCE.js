@@ -8,9 +8,17 @@ const TinyMCE = ({handleSubmit, handleChange, content, setImage}) => {
   const apiKey = 'rwqbmu7r1py640c26ybql3iuc5vt2mpnlys7i1qfaczf6aqw'
   const initialConfig = {
     branding: false,
-    skin_url: "skins/CUSTOM/skins/ui/CUSTOM",
-    content_css: "/skins/CUSTOM/skins/content/CUSTOM/content.css",
-    height: '320px',
+    // skin_url: "skins/CUSTOM/skins/ui/CUSTOM",
+    // content_css: "/skins/CUSTOM/skins/content/CUSTOM/content.css",
+    height: '500px',
+    // // style_formats_merge: false,
+    extended_valid_elements: 'b, font[face|size], i', // adiciona novos itens à lista de elementos válidos
+    convert_fonts_to_spans : false, // impede a conversão de font para span
+    remove_linebreaks : false, // impede a remoção de tags </ br>
+    // entity_encoding: 'raw', // impede a adição de &nbsp;
+    // preformatted : true, // mantem espaços e tabs
+    // format_empty_lines: true, // mantem tags vazias que possuirem formatação. Ex: <div style="margin-left: 10px"></div>
+    verify_html: false, // impede a verificação do HTML e mantem o original digitado no source code
     toolbar: 'undo redo | table | styles | ' +
     'bold italic forecolor fontfamily fontsize | alignleft aligncenter ' +
     'alignright alignjustify | bullist numlist | ' +

@@ -4,7 +4,7 @@ const CKEditor4 = ({handleSubmit, handleChange, content}) => {
 
   const initialConfig = {
     height: '200px',
-    skin: 'kama',
+    // skin: 'kama',
     toolbar: [
       { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
       { name: 'links', items: [ 'Link', 'Unlink' ] },
